@@ -2,8 +2,9 @@
 // server file
 var express = require('express');  
 var app = express();  
-var server = require('http').createServer(app); listen 
+var server = require('http').createServer(app);
 var io = require('socket.io')(server);
+var port = process.env.PORT || 4000;
 
 io.on('connection', function(client) {  
   console.log('Client connected...');
@@ -18,4 +19,4 @@ app.get('/', function(req, res,next) {
     res.sendFile(__dirname + '/index.html');
 });
 
-server.listen(3000);  
+server.listen(port);  
