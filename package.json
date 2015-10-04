@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/andela-bmustapha/socketchat/issues"
   },
-  "homepage": "https://github.com/andela-bmustapha/socketchat#readme"
+  "homepage": "https://github.com/andela-bmustapha/socketchat#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "socket.io": "^1.3.7"
+  }
 }
