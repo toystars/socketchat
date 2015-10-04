@@ -11,10 +11,10 @@
           <input type="submit" value="Send">
       </form>
       <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-      <script src="http://toystars-chat-client.herokuapp.com/socket.io/socket.io.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
       <script>  
         // var socket = io.connect('http://localhost:4000');
-        var socket = io().conenct('http://http://toystars-chat-client.herokuapp.com/');
+        var socket = io.conenct('http://toystars-chat-client.herokuapp.com/');
         socket.on('connect', function(data) {
           socket.emit('join', 'Hello World from client');
         });
