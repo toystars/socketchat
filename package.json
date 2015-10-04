@@ -1,0 +1,19 @@
+{
+  "name": "socketchat",
+  "version": "1.0.0",
+  "description": "Testing socketIO with NodeJS and Android",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-bmustapha/socketchat.git"
+  },
+  "author": "Mustapha Babatunde Oluwaleke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andela-bmustapha/socketchat/issues"
+  },
+  "homepage": "https://github.com/andela-bmustapha/socketchat#readme"
+}
