@@ -6,21 +6,49 @@
   <body>
       <h1>Hello World!</h1>
       <div id="future"></div>
-      <form id="form" id="chat_form">
-          <input id="chat_input" type="text">
-          <input type="submit" value="Send">
+      <form id="signupForm">
+          <input id="username" type="text"><br>
+          <input id="name" type="text"><br>
+          <input id="password" type="password"><br>
+          <input id="signup" type="submit" value="Login">
+      </form>
+      <br/>
+      <br/>
+      <form id="loginForm">
+          <input id="loginUsername" type="text"><br/>
+          <input id="loginPassword" type="password"><br/>
+          <input id="login" type="submit" value="Sign Up">
       </form>
       <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
       <script src="/socket.io/socket.io.js"></script>
       <script>  
-        // var socket = io.connect('http://localhost:4000');
-        var socket = io.connect('http://toystars-chat-client.herokuapp.com/');
-        socket.on('connect', function(data) {
-          socket.emit('join', 'Hello World from client');
+        var socket = io.connect('http://localhost:4000');
+
+        $('#signup').click(function(e) {
+
+          e.preventDefault();
+          var userObject = {
+            name: $('#username').val(),
+            username: $('#name').val(),
+            password: $('#password').val()
+          };
+
+          socket.emit('sign_up', userObject);
         });
-        socket.on('messages', function(data) {
-          alert(data);
+
+        socket.on('sign_up_success', function(data) {
+          console.log(data.message);
         });
+        socket.on('sign_up_error', function(data) {
+          console.log(data.message);
+        });
+
+
+         
+        // var socket = io.connect('http://toystars-chat-client.herokuapp.com/');
+
+
+        
     </script>            
   </body>
 </html>
