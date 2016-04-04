@@ -7,17 +7,17 @@
       <h1>Hello World!</h1>
       <div id="future"></div>
       <form id="signupForm">
-          <input id="username" type="text"><br>
-          <input id="name" type="text"><br>
-          <input id="password" type="password"><br>
-          <input id="signup" type="submit" value="Login">
+          Username: <input id="username" type="text"><br>
+          Name: <input id="name" type="text"><br>
+          Password: <input id="password" type="password"><br>
+          <input id="signup" type="submit" value="Sign Up">
       </form>
       <br/>
       <br/>
       <form id="loginForm">
           <input id="loginUsername" type="text"><br/>
           <input id="loginPassword" type="password"><br/>
-          <input id="login" type="submit" value="Sign Up">
+          <input id="login" type="submit" value="Login">
       </form>
       <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
       <script src="/socket.io/socket.io.js"></script>
@@ -28,14 +28,17 @@
 
           e.preventDefault();
           var userObject = {
-            name: $('#username').val(),
-            username: $('#name').val(),
+            username: $('#username').val(),
+            name: $('#name').val(),
             password: $('#password').val()
           };
 
           socket.emit('sign_up', userObject);
         });
 
+        socket.on('user_exists', function(data) {
+          console.log(data.message);
+        });
         socket.on('sign_up_success', function(data) {
           console.log(data.message);
         });
@@ -43,12 +46,6 @@
           console.log(data.message);
         });
 
-
-         
-        // var socket = io.connect('http://toystars-chat-client.herokuapp.com/');
-
-
-        
     </script>            
   </body>
 </html>

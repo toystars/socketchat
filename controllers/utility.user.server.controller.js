@@ -27,6 +27,7 @@ exports.setOffline = function(username) {
     } else {
       user.online = false;
       user.save(function(error, user) {
+        console.log(user);
         if (error) {
           console.log('An error occured');
         } else {

@@ -11,7 +11,7 @@ exports.ack = function(server) {
   server.username = null;
 
   server.on('sign_up', function(data) {
-
+    console.log('SignUp');
     // check if user is signed up already
     User.findOne({ username: data.username }, function(error, user) {
       if (error) {
@@ -19,7 +19,7 @@ exports.ack = function(server) {
       } else {
         if (user) {
           // user exists already, notify client that user
-          server.emit('user_exists', { message: 'username in use' });
+          server.broadcast.emit('user_exists', { message: 'username in use' });
         } else {
           // user does not exists, create new user
           var user = new User();
@@ -28,10 +28,11 @@ exports.ack = function(server) {
           user.hashPassword(data.password);
           user.save(function(error, user) {
             if (error) {
-              console.log('SignUp');
-              server.emit('sign_up_error', { message: 'internal server error' });
+              server.broadcast.emit('sign_up_error', { message: 'internal server error' });
             } else {
-              server.emit('sign_up_success', { message: 'signup successful' });
+              server.username = user.username;
+              utility.setOnline(user.username);
+              server.broadcast.emit('sign_up_success', { message: 'signup successful' });
             }
           });
         }
@@ -67,12 +68,16 @@ exports.ack = function(server) {
       }
     });
   });
+
+  server.on('disconnect', function () {
+    console.log('Disconnected!');
+    if (server.username) {
+      utility.setOffline(server.username);
+    }
+  });
+
 };
 
-exports.disconnect = function(server) {
-  // make offline
-  utility.setOffline(server.username);
-}
 
 
 
